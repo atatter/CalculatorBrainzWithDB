@@ -1,5 +1,9 @@
 package com.aleks.calculatorbrainzwithdb;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by aleks on 12/04/16.
  */
@@ -48,4 +52,20 @@ public class DayStat implements IEntity{
         return dayCounter;
     }
     public void setDayCounter(long dayCounter) { this.dayCounter = dayCounter; }
+
+    public String toString(UOW uow) {
+        return "Kuupäev: \"" + dayStampToDate(getDaystamp()) + "\" \nMärk: "+ uow.operandRepo.getById(operandId).getOperand() +" päringuid: "+getDayCounter();
+    }
+
+    private String dayStampToDate(long l) {
+        SimpleDateFormat inFormatter = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat outFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            date = inFormatter.parse(String.valueOf(l));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return outFormatter.format(date);
+    }
 }

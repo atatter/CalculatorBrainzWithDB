@@ -35,15 +35,15 @@ public class UOW {
         Operand multiply = operandRepo.add(new Operand("*", 0));
         Operand divide = operandRepo.add(new Operand("/", 0));
 
-        Operation operation1 = operationRepo.add(new Operation(plus.getId(), 1, 2, 3, 0));
-        Operation operation2 = operationRepo.add(new Operation(minus.getId(), 3, 2, 1, 0));
-        Operation operation3 = operationRepo.add(new Operation(multiply.getId(), 1, 2, 2, 0));
-        Operation operation4 = operationRepo.add(new Operation(divide.getId(), 3, 3, 1, 0));
+        Operation operation1 = operationRepo.add(new Operation(plus.getId(), 1, 2, 3, System.currentTimeMillis()));
+        Operation operation2 = operationRepo.add(new Operation(minus.getId(), 3, 2, 1, System.currentTimeMillis()));
+        Operation operation3 = operationRepo.add(new Operation(multiply.getId(), 1, 2, 2, System.currentTimeMillis()));
+        Operation operation4 = operationRepo.add(new Operation(divide.getId(), 3, 3, 1, System.currentTimeMillis()));
 
-        DayStat DayStatPlus = dayStatRepo.add(new DayStat(0, plus.getId(), 1));
-        DayStat DayStatMinus = dayStatRepo.add(new DayStat(0, minus.getId(), 1));
-        DayStat DayStatMultiply = dayStatRepo.add(new DayStat(0, multiply.getId(), 1));
-        DayStat DayStatDivide = dayStatRepo.add(new DayStat(0, divide.getId(), 1));
+        DayStat DayStatPlus = dayStatRepo.add(new DayStat(20000202, plus.getId(), 1));
+        DayStat DayStatMinus = dayStatRepo.add(new DayStat(20000203, minus.getId(), 1));
+        DayStat DayStatMultiply = dayStatRepo.add(new DayStat(20000204, multiply.getId(), 1));
+        DayStat DayStatDivide = dayStatRepo.add(new DayStat(20000205, divide.getId(), 1));
     }
 
 }

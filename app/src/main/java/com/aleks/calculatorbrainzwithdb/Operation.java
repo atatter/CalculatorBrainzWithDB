@@ -1,5 +1,8 @@
 package com.aleks.calculatorbrainzwithdb;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by aleks on 12/04/16.
  */
@@ -64,5 +67,19 @@ public class Operation implements IEntity{
     }
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    //Get operand
+    public String getOperand(UOW uow) { return uow.operandRepo.getById(operandId).getOperand(); }
+
+    public String toString(UOW uow) {
+        return timeStampToDate()+"\nTehe: "+getNr1()+getOperand(uow)+getNr2()+"="+getRes();
+    }
+
+    //Date stuff
+    public String timeStampToDate() {
+        Date date = new Date(this.timestamp);
+        SimpleDateFormat outFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return outFormatter.format(date);
     }
 }

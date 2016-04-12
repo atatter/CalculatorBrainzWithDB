@@ -41,9 +41,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListView() {
-        OperandsAdapter operandsAdapter = new OperandsAdapter(getApplicationContext(), uow.operandRepo.getCursorAll(), uow);
+        //OperandsAdapter operandsAdapter = new OperandsAdapter(getApplicationContext(), uow.operandRepo.getCursorAll(), uow);
+        //ListView listView = (ListView) findViewById(android.R.id.list);
+        //listView.setAdapter(operandsAdapter);
+
+        //OperationsAdapter operationsAdapter = new OperationsAdapter(getApplicationContext(), uow.operationRepo.getCursorAll(), uow);
+        //ListView listView = (ListView) findViewById(android.R.id.list);
+        //listView.setAdapter(operationsAdapter);
+
+        DayStatsAdapter dayStatsAdapter = new DayStatsAdapter(getApplicationContext(), uow.dayStatRepo.getCursorAll(), uow);
         ListView listView = (ListView) findViewById(android.R.id.list);
-        listView.setAdapter(operandsAdapter);
+        listView.setAdapter(dayStatsAdapter);
     }
 
     @Override
