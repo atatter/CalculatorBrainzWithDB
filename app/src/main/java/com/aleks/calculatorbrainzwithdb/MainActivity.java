@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         uow.DropCreateDatabase();
         uow.SeedData();
 
+        initListView();
 
     }
 
