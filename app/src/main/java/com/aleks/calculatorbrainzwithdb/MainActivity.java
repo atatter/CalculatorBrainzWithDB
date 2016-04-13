@@ -14,6 +14,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String STATE_CURRENTVIEW = "currentView";
     private UOW uow;
     private int currentView = 1;
     @Override
@@ -22,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        if(savedInstanceState != null) {
+            currentView = Integer.parseInt(savedInstanceState.getString(STATE_CURRENTVIEW));
+        }
         uow = new UOW(getApplicationContext());
 
         initListView(currentView);
@@ -36,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 initListView(currentView);
             }
         });
+    }
 
-
-
+    @Override
+    public void onSaveInstanceState(Bundle savedIntanceState) {
+        savedIntanceState.putString(STATE_CURRENTVIEW, "" + currentView);
+        super.onSaveInstanceState(savedIntanceState);
     }
 
     @Override
