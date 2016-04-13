@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">CalculatorBrainzWithDB</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_operands">List of operands</string>
+    <string name="action_operations">List of operations</string>
+    <string name="action_daystats">Daystats</string>
+    <string name="action_settings">Remove All</string>
+    <string name="action_dummy">Load dummy data</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by aleks on 12/04/16.
@@ -36,7 +37,7 @@ public class OperandsAdapter extends CursorAdapter {
         TextView textViewName = (TextView) view.findViewById(R.id.name);
 
         Operand operand = uow.operandRepo.cursorToEntity(cursor);
-        textViewName.setText(operand.getOperand());
+        textViewName.setText(operand.getOperand() + " Kasutatud " + operand.getLifetimeCounter() + " kord(a)");
     }
 
 }

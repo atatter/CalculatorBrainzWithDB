@@ -15,7 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private UOW uow;
-
+    private int currentView = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,35 +23,48 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        uow = new UOW(getApplicationContext());
+
+        initListView(currentView);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                initListView(currentView);
             }
         });
 
-        uow = new UOW(getApplicationContext());
-        uow.DropCreateDatabase();
-        uow.SeedData();
 
-        initListView();
 
     }
 
-    private void initListView() {
-        //OperandsAdapter operandsAdapter = new OperandsAdapter(getApplicationContext(), uow.operandRepo.getCursorAll(), uow);
-        //ListView listView = (ListView) findViewById(android.R.id.list);
-        //listView.setAdapter(operandsAdapter);
+    @Override
+    public void onResume() {
+        super.onResume();
+        initListView(currentView);
+    }
 
-        //OperationsAdapter operationsAdapter = new OperationsAdapter(getApplicationContext(), uow.operationRepo.getCursorAll(), uow);
-        //ListView listView = (ListView) findViewById(android.R.id.list);
-        //listView.setAdapter(operationsAdapter);
-
-        DayStatsAdapter dayStatsAdapter = new DayStatsAdapter(getApplicationContext(), uow.dayStatRepo.getCursorAll(), uow);
+    private void initListView(int i) {
         ListView listView = (ListView) findViewById(android.R.id.list);
-        listView.setAdapter(dayStatsAdapter);
+        switch(i) {
+            case(1):
+                OperandsAdapter operandsAdapter = new OperandsAdapter(getApplicationContext(), uow.operandRepo.getCursorAll(), uow);
+                listView.setAdapter(operandsAdapter);
+                break;
+            case(2):
+                OperationsAdapter operationsAdapter = new OperationsAdapter(getApplicationContext(), uow.operationRepo.getCursorAll(), uow);
+                listView.setAdapter(operationsAdapter);
+                break;
+            case(3):
+                DayStatsAdapter dayStatsAdapter = new DayStatsAdapter(getApplicationContext(), uow.dayStatRepo.getCursorAll(), uow);
+                listView.setAdapter(dayStatsAdapter);
+                break;
+        }
+
+
     }
 
     @Override
@@ -68,8 +81,26 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
+        if (id == R.id.action_operands) {
+            currentView = 1;
+            initListView(currentView);
+            return true;
+        }
+        if (id == R.id.action_operations) {
+            currentView = 2;
+            initListView(currentView);
+            return true;
+        }
+        if (id == R.id.action_daystats) {
+            currentView = 3;
+            initListView(currentView);
+            return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            uow.DropCreateDatabase();
+            initListView(currentView);
             return true;
         }
 

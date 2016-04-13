@@ -121,5 +121,6 @@ public abstract class Repo<T extends IEntity> {
 
     // this has to be implemented in child class
     public abstract ContentValues entityToContentValues(T entity);
+
 }
 

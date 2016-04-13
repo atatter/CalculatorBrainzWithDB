@@ -101,4 +101,5 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE_DAYSTATS);
 
     }
+
 }

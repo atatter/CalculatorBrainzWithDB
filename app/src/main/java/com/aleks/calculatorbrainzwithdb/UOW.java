@@ -25,6 +25,12 @@ public class UOW {
         dayStatRepo = new DayStatRepo(database, dbHelper.TABLE_DAYSTATS, dbHelper.DAYSTATS_ALLCOLUMNS);
     }
 
+    public void addDataToDB(double nr1, double nr2, String op, double res) {
+        Operand operand = operandRepo.getByOperand(op);
+        Operation operation = operationRepo.add(new Operation(operand.getId(), nr1, nr2, res, System.currentTimeMillis()));
+        dayStatRepo.addOneToDayCounter(operand.getId());
+    }
+
     public void DropCreateDatabase() {
         dbHelper.dropCreateDatabase(database);
     }
